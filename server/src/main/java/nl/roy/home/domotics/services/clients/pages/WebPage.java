@@ -1,4 +1,4 @@
-package nl.roy.home.domotics.services.pages;
+package nl.roy.home.domotics.services.clients.pages;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -12,7 +12,9 @@ public class WebPage {
     }
 
     public Document loadDocument() throws IOException {
-        Document doc = Jsoup.connect(this.url).get();
+        Document doc = Jsoup.connect(this.url)
+                .userAgent("Mozilla/5.0")
+                .timeout(5000).get();
         return doc;
     }
 }
