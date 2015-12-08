@@ -1,6 +1,5 @@
 package nl.roy.home.domotics.services.endpoints;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import nl.roy.home.domotics.exceptions.UnknownException;
 import nl.roy.home.domotics.services.clients.weather.WeatherService;
 import nl.roy.home.domotics.services.clients.weather.impl.OpenWeatherMapService;
@@ -12,10 +11,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path("/weather")
+@Path("weather")
 public class WeatherEndpoint {
-
-    private static ObjectMapper objectMapper;
 
     private WeatherService weatherService = new OpenWeatherMapService();
 
