@@ -1,5 +1,6 @@
 var jquery = jQuery.noConflict(true);
 
 jquery(document).ready(function() {
-    console.log( "ready!" );
+    var listener = new VoiceListener();
+    listener.start();
 });
