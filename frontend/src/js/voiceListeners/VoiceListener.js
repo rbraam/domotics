@@ -1,7 +1,9 @@
-function VoiceListener(){
+function VoiceListener(speechRecognition){
     var that = this;
-    //this.recognizing = false;
-    this.recognition = new webkitSpeechRecognition();
+    this.recognition = speechRecognition;
+
+    this.listeners = {};
+
     this.recognition.continuous = true;
     this.recognition.interimResults = true;
     this.recognition.lang = 'nl-NL';
@@ -28,12 +30,12 @@ function VoiceListener(){
 
     this.recognition.onStop = function(){
         that.onStop();
-    }
+    };
 }
 
 VoiceListener.prototype.start = function (){
-    this.recognition.start()
-}
+    this.recognition.start();
+};
 
 VoiceListener.prototype.onStart= function() {
     this.recognizing = true;
@@ -41,10 +43,25 @@ VoiceListener.prototype.onStart= function() {
 
 VoiceListener.prototype.onStop = function (){
     this.recognizing = false;
-}
+};
 
-VoiceListener.prototype.onResult = function (result){
-    var msg = new SpeechSynthesisUtterance();
-}
+VoiceListener.prototype.onResult = function (command){
+    if (this.listeners[command] !== undefined){
+        for (var i =0; i < this.listeners[command].length; i ++){
+            this.listeners[command][i].call();
+        }
+    }
+};
+/**
+ * Add listener to given command
+ * @param command command in text
+ * @param handler function that is called when text is received
+ */
+VoiceListener.prototype.addListener = function(command, handler){
+    if (this.listeners[command] === undefined){
+        this.listeners[command] = [];
+    }
+    this.listeners[command].push(handler);
+};
 
 

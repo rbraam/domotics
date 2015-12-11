@@ -25,7 +25,12 @@ module.exports = function(grunt) {
         },
         jshint: {
             // define the files to lint
-            files: ['gruntfile.js', 'src/*.js', 'test/**/*.js'],
+            files: [
+                'gruntfile.js',
+                'src/js/*.js',
+                'src/js/voiceListeners/*.js',
+                'tests/**/*.js'
+            ],
             // configure JSHint (documented at http://www.jshint.com/docs/)
             options: {
                 // more options here if you want to override JSHint defaults
@@ -33,6 +38,15 @@ module.exports = function(grunt) {
                     jQuery: true,
                     console: true,
                     module: true
+                }
+            }
+        },
+        jasmine: {
+            domotics: {
+                src: ['src/js/voiceListeners/*.js',
+                    'src/app.js'],
+                options: {
+                    specs: 'tests/*.js'
                 }
             }
         },
@@ -49,6 +63,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
 
     // Default task(s).
     grunt.registerTask('default', ['jshint','uglify','connect','watch']);
