@@ -66,6 +66,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jasmine');
 
     // Default task(s).
-    grunt.registerTask('default', ['jshint','uglify','connect','watch']);
+    grunt.registerTask('default', ['jshint','jasmine','uglify','connect','watch']);
+    grunt.registerTask('build', ['jshint','jasmine:domotics:build','uglify']);
 
 };
