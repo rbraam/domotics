@@ -1,9 +1,14 @@
-function VoiceListener(speechRecognition){
+function VoiceListener(speechRecognition, speaker){
     var that = this;
     this.recognition = speechRecognition;
+    this.speaker = speaker;
 
     this.listeners = {};
 
+    this.initRecognition();
+}
+
+VoiceListener.prototype.initRecognition = function (){
     this.recognition.continuous = true;
     this.recognition.interimResults = true;
     this.recognition.lang = 'nl-NL';
@@ -15,7 +20,7 @@ function VoiceListener(speechRecognition){
     this.recognition.onresult = function(event) {
         if (typeof(event.results) == 'undefined') {
             this.recognition.stop();
-           // upgrade();
+            // upgrade();
             return;
         }
         for (var i = event.resultIndex; i < event.results.length; ++i) {
@@ -31,7 +36,7 @@ function VoiceListener(speechRecognition){
     this.recognition.onStop = function(){
         that.onStop();
     };
-}
+};
 
 VoiceListener.prototype.start = function (){
     this.recognition.start();

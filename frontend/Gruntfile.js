@@ -29,6 +29,7 @@ module.exports = function(grunt) {
                 'gruntfile.js',
                 'src/js/*.js',
                 'src/js/voiceListeners/*.js',
+                'src/js/speakers/*.js',
                 'tests/**/*.js'
             ],
             // configure JSHint (documented at http://www.jshint.com/docs/)
@@ -44,6 +45,7 @@ module.exports = function(grunt) {
         jasmine: {
             domotics: {
                 src: ['src/js/voiceListeners/*.js',
+                    'src/js/speakers/*.js',
                     'src/app.js'],
                 options: {
                     specs: 'tests/*.js'
