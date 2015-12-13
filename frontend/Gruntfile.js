@@ -70,5 +70,6 @@ module.exports = function(grunt) {
     // Default task(s).
     grunt.registerTask('default', ['jshint','jasmine','uglify','connect','watch']);
     grunt.registerTask('build', ['jshint','jasmine:domotics:build','uglify']);
+    grunt.registerTask('test',['jshint','jasmine']);
 
 };
