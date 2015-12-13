@@ -9,10 +9,6 @@ describe("Speaker Spec test", function() {
         speaker = new Speaker(speechSynthesis);
     });
 
-    it("Test if speaker speeks", function() {
-        speaker.speak("Hallo wereld");
-    });
-
     it("Test if speaker speaks goodmorning when sayHello is called in the morning", function() {
         spyOn(speaker, 'speak');
 
