@@ -1,3 +1,3 @@
 
-    var listener = new VoiceListener(new webkitSpeechRecognition());
+    var listener = new StartVoiceListener(new webkitSpeechRecognition(), new Speaker());
     listener.start();

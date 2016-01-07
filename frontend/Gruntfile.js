@@ -9,7 +9,12 @@ module.exports = function(grunt) {
                 sourceMap: true
             },
             build: {
-                src: 'src/js/**/*.js',
+                src: [
+                    'src/js/voiceListeners/VoiceListener.js',
+                    'src/js/voiceListeners/StartVoiceListener.js',
+                    'src/js/speakers/*.js',
+                    'src/js/app.js'
+                ],
                 dest: 'build/<%= pkg.name %>.min.js'
             }
         },
@@ -27,7 +32,6 @@ module.exports = function(grunt) {
             // define the files to lint
             files: [
                 'gruntfile.js',
-                'src/js/*.js',
                 'src/js/voiceListeners/*.js',
                 'src/js/speakers/*.js',
                 'tests/**/*.js'
@@ -44,9 +48,11 @@ module.exports = function(grunt) {
         },
         jasmine: {
             domotics: {
-                src: ['src/js/voiceListeners/*.js',
-                    'src/js/speakers/*.js',
-                    'src/app.js'],
+                src: [
+                    'src/js/voiceListeners/VoiceListener.js',
+                    'src/js/voiceListeners/StartVoiceListener.js',
+                    'src/js/speakers/*.js'
+                ],
                 options: {
                     specs: 'tests/*.js'
                 }
