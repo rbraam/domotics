@@ -10,7 +10,7 @@ describe("IdleVoiceListener Spec test", function() {
     });
 
     it("Added listeners are called correctly", function() {
-        idleVoiceListener.onResult("hallo truus");
+        idleVoiceListener.onResult("hallo");
         expect(speaker.sayHello).toHaveBeenCalled();
     });
 });

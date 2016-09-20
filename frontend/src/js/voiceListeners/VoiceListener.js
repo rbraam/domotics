@@ -1,8 +1,8 @@
-function VoiceListener(speechRecognition, speaker){
+function VoiceListener(speechRecognition, speaker, visualChat){
     var that = this;
     this.recognition = speechRecognition;
     this.speaker = speaker;
-
+    this.visualChat = visualChat;
     this.listeners = {};
 
     this.recognition.continuous = true;
@@ -10,6 +10,8 @@ function VoiceListener(speechRecognition, speaker){
     this.recognition.lang = 'nl-NL';
 
     this.started = true;
+
+    this.hearMessage = null;
 
     this.recognition.onstart = function() {
         that.onStart();
@@ -22,11 +24,27 @@ function VoiceListener(speechRecognition, speaker){
             return;
         }
         for (var i = event.resultIndex; i < event.results.length; ++i) {
+            var text = event.results[i][0].transcript;
             if (event.results[i].isFinal) {
-                console.log("final: " + event.results[i][0].transcript);
-                that.onResult(event.results[i][0].transcript);
+                if (that.visualChat) {
+                    if (that.hearMessage === null){
+                        that.hearMessage = that.visualChat.hear(text);
+                    }else{
+                        that.hearMessage.setText(text);
+                    }
+                    that.hearMessage = null;
+                }
+                console.log("final: " + text);
+                that.onResult(text);
             } else {
-                console.log("not final: " + event.results[i][0].transcript);
+                if (that.visualChat) {
+                    if (that.hearMessage === null){
+                        that.hearMessage = that.visualChat.hear(text);
+                    }else{
+                        that.hearMessage.setText(text);
+                    }
+                }
+                console.log("not final: " + text);
             }
         }
     };
@@ -58,9 +76,11 @@ VoiceListener.prototype.onResult = function (command){
     if (!this.started){
         return;
     }
-    if (this.listeners[command] !== undefined){
-        for (var i =0; i < this.listeners[command].length; i ++){
-            this.listeners[command][i].call();
+    var lowerCaseCommand = command.toLowerCase();
+    console.log(lowerCaseCommand);
+    if (this.listeners[lowerCaseCommand] !== undefined){
+        for (var i =0; i < this.listeners[lowerCaseCommand].length; i ++){
+            this.listeners[lowerCaseCommand][i].call();
         }
     }
 };
@@ -70,10 +90,11 @@ VoiceListener.prototype.onResult = function (command){
  * @param handler function that is called when text is received
  */
 VoiceListener.prototype.addListener = function(command, handler){
-    if (this.listeners[command] === undefined){
-        this.listeners[command] = [];
+    var lowerCaseCommand = command.toLowerCase();
+    if (this.listeners[lowerCaseCommand] === undefined){
+        this.listeners[lowerCaseCommand] = [];
     }
-    this.listeners[command].push(handler);
+    this.listeners[lowerCaseCommand].push(handler);
 };
 
 

@@ -13,6 +13,7 @@ module.exports = function(grunt) {
                     'src/js/voiceListeners/VoiceListener.js',
                     'src/js/voiceListeners/StartVoiceListener.js',
                     'src/js/speakers/*.js',
+                    'src/js/visual/*.js',
                     'src/js/app.js'
                 ],
                 dest: 'build/<%= pkg.name %>.min.js'
@@ -20,7 +21,7 @@ module.exports = function(grunt) {
         },
         watch: {
             css: {
-                files:  ['<%= jshint.files %>'],
+                files:  ['src/css/*.css'],
                 tasks: ['sass:dev']
             },
             js: {

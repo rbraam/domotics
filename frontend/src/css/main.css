@@ -1,0 +1,28 @@
+.conversation {
+	background-color: lightgray;
+	width: 100%;
+	height: 500px;
+}
+
+.message {
+	widht: 100%;
+	height: 40px;
+	clear: both;
+}
+.message .speakClass {
+	background-color:  #40a070;
+	padding: 10px;
+	float: left;
+	margin: 10px;
+	border-radius: 10px;
+	max-width: 300px;
+}
+
+.message .hearClass {
+	background-color:  #FFF;
+	padding: 10px;
+	float: right;
+	margin: 10px;
+	border-radius: 10px;
+	max-width: 300px;
+}
